@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Proposal</title>
+
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        overflow: hidden;
+        padding: 15px;
+    }
+
+    .box {
+        width: 100%;
+        max-width: 360px;
+        background: rgba(255,255,255,0.18);
+        padding: 25px 20px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        z-index: 2;
+    }
+
+    h1 {
+        font-size: 26px;
+        margin-bottom: 25px;
+        line-height: 1.3;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-around;
+        position: relative;
+        height: 80px;
+    }
+
+    button {
+        font-size: 18px;
+        padding: 12px 22px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        min-width: 100px;
+        touch-action: manipulation;
+    }
+
+    #yes {
+        background: #2ecc71;
+        color: white;
+    }
+
+    #no {
+        background: #e74c3c;
+        color: white;
+        position: absolute;
+    }
+
+    /* HEARTS */
+    .heart {
+        position: fixed;
+        font-size: 24px;
+        animation: floatUp 3s ease-out forwards;
+        pointer-events: none;
+    }
+
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-220px) scale(1.8);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>💖 Will you be my Valentine? 💖</h1>
+
+    <div class="buttons">
+        <button id="yes" onclick="yesClicked()">Yes 💘</button>
+        <button id="no">No 💔</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+
+function moveNoMultiple() {
+    let moves = Math.floor(Math.random() * 2) + 3; // 3 or 4 times
+    let count = 0;
+
+    const moveInterval = setInterval(() => {
+        moveOnce();
+        count++;
+
+        if (count >= moves) {
+            clearInterval(moveInterval);
+        }
+    }, 150); // speed of movement
+}
+
+function moveOnce() {
+    const padding = 20;
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    const texts = [
+        "No 😜",
+        "Oops 😏",
+        "Missed me 🤭",
+        "Nice try 😈",
+        "Almost 😆"
+    ];
+    noBtn.innerText = texts[Math.floor(Math.random() * texts.length)];
+}
+
+// Mobile + desktop triggers
+noBtn.addEventListener("touchstart", moveNoMultiple);
+noBtn.addEventListener("mouseover", moveNoMultiple);
+</script>
+</body>
+</html>
