@@ -1,0 +1,42 @@
+<script>
+const noBtn = document.getElementById("no");
+
+function moveNoMultiple() {
+    let moves = Math.floor(Math.random() * 2) + 3; // 3 or 4 times
+    let count = 0;
+
+    const moveInterval = setInterval(() => {
+        moveOnce();
+        count++;
+
+        if (count >= moves) {
+            clearInterval(moveInterval);
+        }
+    }, 150); // speed of movement
+}
+
+function moveOnce() {
+    const padding = 20;
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    const texts = [
+        "No 😜",
+        "Oops 😏",
+        "Missed me 🤭",
+        "Nice try 😈",
+        "Almost 😆"
+    ];
+    noBtn.innerText = texts[Math.floor(Math.random() * texts.length)];
+}
+
+// Mobile + desktop triggers
+noBtn.addEventListener("touchstart", moveNoMultiple);
+noBtn.addEventListener("mouseover", moveNoMultiple);
+</script>
